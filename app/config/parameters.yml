@@ -1,0 +1,28 @@
+parameters:
+    #database_driver:   pdo_mysql
+    #database_host:     continuequhist.mysql.db
+    #database_port:     3306
+    #database_name:     continuequhist
+    #database_user:     continuequhist
+    #database_password: 
+    database_driver:   pdo_mysql
+    database_host:     localhost
+    database_port:     3306
+    database_name:     continuezlhistoire
+    database_user:     root
+    database_password: ~	
+    
+    
+    #mailer_transport:  smtp
+    #mailer_host:       127.0.0.1
+    #mailer_user:       ~
+    #mailer_password:   ~
+    mailer_transport:  smtp
+    mailer_auth_mode:  login
+    mailer_host:       smtp.continuezlhistoire.fr
+    mailer_port:       587
+    mailer_user:       admin
+    mailer_password:   
+
+    locale:            fr
+    secret:            ThisTokenIsNotSoSecretChangeIt

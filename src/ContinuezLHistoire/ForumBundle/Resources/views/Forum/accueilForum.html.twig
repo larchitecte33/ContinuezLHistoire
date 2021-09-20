@@ -1,0 +1,41 @@
+{% extends "ContinuezLHistoireForumBundle::layout.html.twig" %}
+ 
+{% block title %}
+  {{ parent() }} - Accueil forum
+{% endblock %}
+ 
+{% block continuezlhistoireforum_body %}
+  <h2 class="sousTitrePage">Liste des discussions</h2>
+  
+  <table border="1px">
+      <tr>
+          <th align="center" bgcolor="#2255BB"> &nbsp;&nbsp; <font color="#FFFFFF">Sujet</font> &nbsp;&nbsp; </th>
+          <th align="center" bgcolor="#2255BB"> &nbsp;&nbsp; <font color="#FFFFFF">Auteur du sujet</font> &nbsp;&nbsp; </th>
+          <th align="center" bgcolor="#2255BB"> &nbsp;&nbsp; <font color="#FFFFFF">Nombre de messages</font> &nbsp;&nbsp; </th>
+      </tr>
+        {% for discussion in listeDiscussions %}
+            <tr>
+                <td align="center" bgcolor="#78B3D1"> &nbsp;&nbsp; <font color="#2255BB"><a href="{{ path('continuezlhistoireforum_discussion', {'id': discussion.id}) }}">{{ discussion.sujet }}</a></font> &nbsp;&nbsp; </td>
+                <td align="center" bgcolor="#78B3D1"> &nbsp;&nbsp; <font color="#2255BB">{{ discussion.auteur }}</font> &nbsp;&nbsp; </td>
+                <td align="center" bgcolor="#78B3D1"> &nbsp;&nbsp; <font color="#2255BB">{{ discussion.nbDeMessages }}</font> &nbsp;&nbsp; </td>
+            </tr>
+        {% endfor %}
+  </table>
+  
+  <br/>
+  
+  {% if user != null and is_granted('ROLE_AUTEUR') %}
+        <div class="well">
+            <b>Créer une nouvelle discussion</b>
+            <form method="post" {{ form_enctype(form) }}>
+                {{ form_widget(form) }}
+		<input type="submit" class="btn btn-primary" />
+            </form>
+        </div>
+  {% elseif user != null %}
+        Vous n'êtes pas autorisé à poster sur le forum. Si vous pensez que c'est une erreur, veuillez 
+        contacter l'administrateur.
+  {% else %}
+        Seul les utilisateurs connectés peuvent créer de nouvelles discussions.
+  {% endif %}
+{% endblock %}

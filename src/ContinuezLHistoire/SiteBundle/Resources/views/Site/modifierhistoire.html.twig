@@ -1,0 +1,106 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+ 
+{% block title %}
+  {{ parent() }} - Visualisation d'une histoire
+{% endblock %}
+  
+{% block continuezlhistoiresite_body %}
+  
+    {% if histoire.estClos %}
+        Cette histoire est close. Vous ne pouvez plus la modifier.
+    {% elseif histoire.estEnInstanceDeCloture %}
+        Cette histoire est en instance de clôture. Pour la modifier, veuillez d'abord la dévérouiller.
+    {% else %}
+        <b>{{ histoire.titre }}</b>
+        <br/>
+        <br/>
+
+        {% for sousHistoire in listeSousHistoires %}	
+            {{ sousHistoire.contenu | raw }}
+        {% endfor %}
+
+        <br/>
+        <br/>
+        
+        <p id="comptearebours"></p>
+        <p id="nombredecharacteres"></p>
+
+        {{ tinymce_init() }}
+        <div class="well">    
+            <form method="post" {{ form_enctype(form) }}>
+                {{ form_widget(form) }}
+
+                <input type="submit" class="btn btn-primary" />    
+
+            </form>
+        </div>
+    {% endif %}
+    
+    <p>
+        <a href="{{ path('continuezlhistoiresite_stopperedition', {'id': histoire.id, 'typemodification': typemodification}) }}" class="btn">
+            <i class="icon-chevron-left"></i>
+            Retour à l'histoire
+        </a>
+    </p>
+    
+    <script type="text/javascript">
+      
+    var myVar3 = function() { getNombreDeCharacteres();};
+    var myVar=setInterval(function(){myTimer();},1000);
+    var nbSecondesRestantes = 120;
+
+    function myTimer()
+        {
+            var d=new Date();
+            var t=nbSecondesRestantes;
+
+            if(t < 0)
+            {
+                t = 0;
+            }
+
+            document.getElementById("comptearebours").innerHTML="Nombre de secondes restantes avant la fin de l'édition :  " + t;
+            document.getElementById("nombredecharacteres").innerHTML = "Nombre de caractères restants : " + (255 - tinyMCE.activeEditor.getContent().length);
+            
+            if(255 - tinyMCE.activeEditor.getContent().length < 0)
+                document.getElementById("nombredecharacteres").style.color = "red";
+            else
+                document.getElementById("nombredecharacteres").style.color = "black";
+
+            nbSecondesRestantes--;
+
+            if(nbSecondesRestantes === 0)
+            {
+                    window.location = "http://localhost/Symfony/web/app_dev.php/accueil";
+            }
+        }
+    
+    function getNombreDeCharacteres() {
+        document.getElementById("nombredecharacteres").innerHTML="test";//tinyMCE.activeEditor.getContents().length;
+    }
+    
+   function checkContentLength(editorObject){	 
+	    var content = editorObject.getContent();
+	    var length = content.length;
+	    alert('editor content length - ' + length);
+	}
+
+    
+   tinymce_init({
+      mode : "textareas",
+      theme : "advanced",
+      force_br_newlines : false,
+      force_p_newlines : false,
+      forced_root_block : 'br',
+      setup : function(ed) {
+        ed.onKeyPress.add(
+          function(ed)
+          {
+            checkContentLength(ed); 
+          }
+        );    
+      }
+    });       
+    </script>
+    
+{% endblock %}

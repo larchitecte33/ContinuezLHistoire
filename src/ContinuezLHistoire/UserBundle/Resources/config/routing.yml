@@ -1,0 +1,27 @@
+continuez_l_histoire_user_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: ContinuezLHistoireUserBundle:Default:index }
+
+continuezlhistoireuser_validationcompte:
+    path: /validation_compte
+    defaults: { _controller: ContinuezLHistoireUserBundle:User:validationCompte }
+    
+continuezlhistoireuser_recapitulatifcompte:
+    path: /recupitulatif_compte/{id}
+    defaults: { _controller: ContinuezLHistoireUserBundle:User:recapitulatifCompte }
+    requirements:
+        id: \d+
+
+continuezlhistoireuser_infosnonvalides:
+    path: infos_non_valides
+    defaults: { _controller: ContinuezLHistoireUserBundle:User:infosNonValides }
+    
+continuezlhistoireuser_inscription:
+    path: /inscription
+    defaults: { _controller: ContinuezLHistoireUserBundle:User:inscription }
+    
+continuezlhistoireuser_desinscription:
+    path: /desinscription/{id}
+    defaults: { _controller: ContinuezLHistoireUserBundle:User:desinscription }
+    requirements:
+        id: \d+

@@ -1,0 +1,12 @@
+parameters:
+#    continuez_l_histoire_user.example.class: ContinuezLHistoire\UserBundle\Example
+
+services:
+    continuez_l_histoire_user.registration_complet:
+        class: ContinuezLHistoire\UserBundle\EventListener\RegistrationConfirmListener
+        arguments: [@router]
+        tags:
+            - { name: kernel.event_subscriber }
+#    continuez_l_histoire_user.example:
+#        class: %continuez_l_histoire_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

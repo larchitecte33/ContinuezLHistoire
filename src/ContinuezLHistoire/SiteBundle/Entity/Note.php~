@@ -1,0 +1,48 @@
+<?php
+
+namespace ContinuezLHistoire\SiteBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Note
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="ContinuezLHistoire\SiteBundle\Entity\NoteRepository")
+ */
+class Note
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\OneToOne(targetEntity="ContinuezLHistoire\SiteBundle\Entity\Histoire", cascade={"persist"})
+     */
+    private $histoire;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="ContinuezLHistoire\UserBundle\Entity\", cascade={"persist"})
+     */
+    private $user;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="ContinuezLHistoire\SiteBundle\Entity\AvisUtilisateur", cascade={"persist"})
+     */
+    private $avisUtilisateur;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}

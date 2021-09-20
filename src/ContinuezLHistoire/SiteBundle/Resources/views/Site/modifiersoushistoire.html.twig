@@ -1,0 +1,57 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+ 
+{% block title %}
+  {{ parent() }} - Visualisation d'une histoire
+{% endblock %}
+ 
+{% block continuezlhistoiresite_body %}
+  <p id="nombredecharacteres"></p>
+  {% for maSousHistoire in listeSousHistoires %}
+    {% if maSousHistoire.place != sousHistoire.place %}
+      {{ maSousHistoire.contenu | raw }}
+    {% else %}
+      {{ tinymce_init() }}
+      <div class="well">
+        <form method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form) }}
+            <input type="submit" class="btn btn-primary" />
+        </form>
+      </div>
+    {% endif %}
+  {% endfor %}
+  <br/>
+  <br/>
+  <p>
+    <a href="{{ path('continuezlhistoiresite_voir', {'id': histoire.id, 'typemodification': typemodification}) }}" class="btn">
+        <i class="icon-chevron-left"></i>
+        Retour à l'histoire
+    </a>
+    <a href="{{ path('continuezlhistoiresite_supprimersoushistoire', {'id': sousHistoire.id, 'typemodification': typemodification}) }}" class="btn">
+        <i class="icon-remove-sign"></i>
+        Supprimer la sous-histoire
+    </a>
+  </p>
+  
+  <script type="text/javascript">
+      var myVar=setInterval(function(){AfficheCaracteresRestants();},1000);
+      
+      function AfficheCaracteresRestants()
+      {
+          document.getElementById("nombredecharacteres").innerHTML = "Nombre de caractères restants : " + (255 - tinyMCE.activeEditor.getContent().length);
+      
+          if(255 - tinyMCE.activeEditor.getContent().length < 0)
+              document.getElementById("nombredecharacteres").style.color = "red";
+          else
+              document.getElementById("nombredecharacteres").style.color = "black";
+      }
+      
+      tinymce_init({
+        mode : "textareas",
+        theme : "advanced",
+        force_br_newlines : false,
+        force_p_newlines : false,
+        forced_root_block : 'br'
+      });
+  </script>
+  
+{% endblock %}

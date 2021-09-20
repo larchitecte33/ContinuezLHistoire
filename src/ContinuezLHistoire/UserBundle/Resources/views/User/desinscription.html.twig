@@ -1,0 +1,23 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+ 
+{% block title %}
+  Désinscription - {{ parent() }}
+{% endblock %}
+ 
+{% block continuezlhistoiresite_body %}
+  <h2>Désinscription</h2>
+  
+  <p>
+      Etes-vous sûr de vouloir vous désinscrire ? <br/>
+      En vous désinscrivant, vous ne pourrez plus participer activement à la vie de <i>Continuez l'histoire.</i>
+  </p>
+  
+  <form action="{{ path('continuezlhistoireuser_desinscription', {'id': user.id}) }}" method="post">
+    <a href="{{ path('continuezlhistoiresite_accueil') }}" class="btn">
+      <i class="icon-chevron-left"></i>
+      Retour à la liste
+    </a>
+    <input type="submit" value="Supprimer mon compte" class="btn btn-danger" />
+    {{ form_rest(form) }}
+  </form>
+{% endblock %}

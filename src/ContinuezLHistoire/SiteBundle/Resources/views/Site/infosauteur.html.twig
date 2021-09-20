@@ -1,0 +1,21 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+ 
+{% block title %}
+  {{ parent() }} - Infos auteur
+{% endblock %}
+ 
+{% block continuezlhistoiresite_body %}
+  <h2 class="sousTitrePage">Infos auteur</h2>
+  <h3>Qui suis-je ?</h3>
+  <p>Je m'appelle Gauthier Dubourdieu. J'ai 25 ans. Je suis un analyste programmeur passionné par 
+     l'informatique, mais aussi par le cyclisme et la litterature Fantasy.</p>
+  
+  <h3>Pourquoi avoir créé ce site ?</h3>
+  <p>Ce site se base sur une idée simple. Beaucoup de personnes ont un jour eu l'envie d'écrire une histoire.
+     Mais peu l'ont réellement fait par manque de temps. Avec <b>Continuez l'histoire</b>, le temps n'est 
+     plus un problème. Vous pouvez prendre part à l'écriture d'une histoire sans pour autant y passer 
+     beaucoup de temps.</p>
+  
+  <h3>Comment me contacter ?</h3>
+  <p>Vous avez des questions. Vous pouvez les poser via ce <a href="{{ path('continuezlhistoiresite_afficherformulairecontact') }}">formulaire.</a></p>
+{% endblock %}

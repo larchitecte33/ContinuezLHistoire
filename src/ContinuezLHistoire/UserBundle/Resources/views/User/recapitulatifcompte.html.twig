@@ -1,0 +1,15 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+ 
+{% block title %}
+  Récapitulatif des informations du compte - {{ parent() }}
+{% endblock %}
+ 
+{% block continuezlhistoiresite_body %}
+  Félicitations, vous avez validé votre compte. Vous pouvez dès à présent profiter de tous les avantages 
+  réservés aux membres de <b>continuez l'histoire</b>.
+  <br/>
+  <br/>
+  Voici le récapitulatif des informations de votre compte :<br/>
+  - Nom d'utilisateur : {{ user[0].username }}<br/>
+  - Email : {{ user[0].email }}
+{% endblock %}

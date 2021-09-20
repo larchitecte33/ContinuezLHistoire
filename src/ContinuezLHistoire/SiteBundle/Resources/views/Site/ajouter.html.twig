@@ -1,0 +1,19 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+ 
+{% block title %}
+  {{ parent() }} - Création d'une histoire
+{% endblock %}
+ 
+{% block continuezlhistoiresite_body %}
+	<h3 class="sousTitrePage">Création d'une histoire</h3>
+ 
+        {% if message != '' %}
+            <p style="color:red"> {{ message }} </p>
+        {% endif %}
+	<div class="well">
+		<form method="post" {{ form_enctype(form) }}>
+			{{ form_widget(form) }}
+			<input type="submit" class="btn btn-primary" />
+		</form>
+	</div>
+{% endblock %}

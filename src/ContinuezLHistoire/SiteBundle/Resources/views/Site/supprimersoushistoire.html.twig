@@ -1,0 +1,23 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+
+{% block title %}
+  {{ parent() }} - Supprimer sous-histoire
+{% endblock %}
+  
+{% block continuezlhistoiresite_body %}
+  <h2>Supprimer une sous-histoire</h2>
+  
+  <p>
+      Etes-vous sûr de vouloir supprimer cette sous-histoire ?
+  </p>
+  
+  <form action="{{ path('continuezlhistoiresite_supprimersoushistoire', {'id': sousHistoire.id, 'typemodification': typemodification}) }}" method="post">
+    <a href="{{ path('continuezlhistoiresite_voir', {'id': histoire.id, 'typemodification': typemodification}) }}" class="btn">
+      <i class="icon-chevron-left"></i>
+      Retour à l'histoire
+    </a>
+    <input type="submit" value="Supprimer" class="btn btn-danger" />
+    {{ form_rest(form) }}
+  </form>
+  
+{% endblock %}

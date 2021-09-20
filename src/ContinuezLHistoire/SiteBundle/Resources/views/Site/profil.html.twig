@@ -1,0 +1,79 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+
+{% block title %}
+   {{ parent() }} - Profil de {{ user.username }}
+{% endblock %}
+  
+{% block continuezlhistoiresite_body %}
+  <h2 class="sousTitrePage">Profil de {{ user.username }}</h2>
+  {% if user.imageProfil != null %}
+    <center> <img src="{{ asset(user.imageProfil.webPath)}}" alt="{{ user.imageProfil.alt }}"  /> </center>
+  {% endif %}
+  
+  <br/>
+  <br/>
+  
+  <b>Nombre de points</b> : {{ user.nbPoints }}
+  
+  <br/>
+  <br/>
+  
+  <b>Statuts acquis</b>
+  <br/>
+  <i>Site :</i>
+  <br/>
+  {% if nbSousHistoires < 1 %}
+    Aucune activité <br/>
+  {% endif %}
+  {% if nbSousHistoires >= 1 %}
+    Nouveau rédacteur --- 1 sous-histoire <br/>
+  {% endif %}
+  {% if nbSousHistoires >= 5 %}
+    Ecrivain en herbe --- 5 sous-histoire <br/>
+  {% endif %}
+  {% if nbSousHistoires >= 10 %}
+    Ecivain prometteur --- 10 sous-histoire <br/>
+  {% endif %}
+  {% if nbSousHistoires >= 20 %}
+    Ecrivain assidu --- 20 sous-histoire <br/>
+  {% endif %}
+  {% if nbSousHistoires >= 30 %}
+    Ecrivain chevronné --- 30 sous-histoire <br/>
+  {% endif %}
+  {% if nbSousHistoires >= 50 %}
+    Ecrivain passionné --- 50 sous-histoire <br/>
+  {% endif %}
+    
+  <br/>
+  <i>Forum :</i>
+  <br/>
+  {% if nbMessages < 1 %}
+    Aucune activité <br/>
+  {% endif %}
+  {% if nbMessages >= 1 %}
+    Nouveau forumeur --- 1 message <br/>
+  {% endif %}
+  {% if nbMessages >= 5 %}
+    Forumeur débutant --- 5 messages <br/>
+  {% endif %}
+  {% if nbMessages >= 10 %}
+    Forumeur montant --- 10 messages <br/>
+  {% endif %}
+  {% if nbMessages >= 30 %}
+    Forumeur confirmé --- 30 messages <br/>
+  {% endif %}
+  {% if nbMessages >= 50 %}
+    As du forum --- 50 messages <br/>
+  {% endif %}
+   
+  <br/>
+  
+  <b>Qui suis-je ?</b>
+  <br/>
+  {% if user.quiSuisJe != null %}
+    {{ user.quiSuisJe | raw }}
+  {% else %}
+    Pas d'information disponible.
+  {% endif %}
+  
+{% endblock %}

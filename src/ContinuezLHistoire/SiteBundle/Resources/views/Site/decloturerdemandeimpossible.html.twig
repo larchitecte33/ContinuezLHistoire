@@ -1,0 +1,17 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+ 
+{% block title %}
+  {{ parent() }} - Dévérouillage impossible d'une histoire
+{% endblock %}
+   
+{% block continuezlhistoiresite_body %}
+  Dévérouillage de l'histoire "{{ histoire.titre }}" impossible
+  <br/>
+  <br/>
+  <p>Votre demande de dévérouillage de l'histoire ne peut être effectué car l'histoire n'est pas en cours de vérouillage.</p>
+  
+  <a href="{{ path('continuezlhistoiresite_voir', {'id': histoire.id, 'typemodification': typemodification}) }}" class="btn">
+        <i class="icon-chevron-left"></i>
+        Retour à l'histoire
+  </a>
+{% endblock %}

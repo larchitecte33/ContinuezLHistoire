@@ -1,0 +1,23 @@
+{% extends "ContinuezLHistoireForumBundle::layout.html.twig" %}
+
+{% block title %}
+  {{ parent() }} - Supprimer une discussion
+{% endblock %}
+  
+{% block continuezlhistoireforum_body %}
+  <h2>Supprimer une discussion</h2>
+  
+  <p>
+      Etes-vous sûr de vouloir supprimer cette discussion ? <br/>
+      La suppression d'une discussion entraine celle de tous les messages la composant.
+  </p>
+  
+  <form action="{{ path('continuezlhistoireforum_supprimerdiscussion', {'id': discussion.id}) }}" method="post">
+    <a href="{{ path('continuezlhistoireforum_accueilforum') }}" class="btn">
+      <i class="icon-chevron-left"></i>
+      Retour à l'accueil du forum
+    </a>
+    <input type="submit" value="Supprimer" class="btn btn-danger" />
+    {{ form_rest(form) }}
+  </form>
+{% endblock %}

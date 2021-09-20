@@ -1,0 +1,27 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+ 
+{% block title %}
+  {{ parent() }} - Liste des auteurs de l'histoire
+{% endblock %}
+ 
+{% block continuezlhistoiresite_body %}
+  <h3>Liste des auteurs de l'histoire</h3>
+  <p>Voici la liste des auteurs ayant participé à l'écriture de cette histoire :</p>
+  
+  {% for auteur in listeAuteurs %}
+  <a href="{{ path('continuezlhistoiresite_consulterprofil', {'username': auteur.username}) }}">{{ auteur.username }}</a>
+    {% if not loop.last %}
+        -
+    {% endif %}
+  {% endfor %}
+  
+  <br/>
+  <br/>
+        
+  <p>
+    <a href="{{ path('continuezlhistoiresite_voir', {'id': histoire.id, 'typemodification': typemodification}) }}" class="btn">
+        <i class="icon-chevron-left"></i>
+        Retour à l'histoire
+    </a>
+  </p>
+{% endblock %}

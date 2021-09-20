@@ -1,0 +1,50 @@
+<div class="well">
+    {% for histoire in histoires %}
+        <a href="{{ path('continuezlhistoiresite_voir', {'id': histoire.id, 'typemodification': typemodification}) }}">{{ histoire.titre }}</a>, dernier auteur de changement : {{ histoire.dernierAuteur }} 
+        
+        {% if user == histoire.premierAuteur %}
+            <a href="{{ path("continuezlhistoiresite_supprimer", {'id' : histoire.id}) }}">
+                <img src="{{ asset('img/icone-fermer.png') }}"/></a>
+        {% endif %}
+        <br/>
+        {% set moyenne = 0 %}
+        {% set nbNotes = 0 %}
+        {% set appreciation = "" %}
+        {% for note in notes %}
+            {% if note.histoire == histoire %}
+                {% set moyenne = moyenne + note.avisUtilisateur.poidsAvis %}
+                {% set nbNotes = nbNotes + 1 %}
+            {% endif %}
+        {% endfor %}
+        {% if nbNotes > 0 %}
+            {% set moyenne = moyenne / nbNotes %}
+            {% if moyenne > 18 %}
+                {% set appreciation = "Excellent" %}
+            {% elseif moyenne > 16 %}
+                {% set appreciation = "Très bien" %}
+            {% elseif moyenne > 14 %}
+                {% set appreciation = "Bien" %}
+            {% elseif moyenne > 12 %}
+                {% set appreciation = "Pas mal" %}
+            {% elseif moyenne > 10 %}
+                {% set appreciation = "Bon début" %}
+            {% elseif moyenne > 8 %}
+                {% set appreciation = "Ca pourrait être mieux" %}
+            {% elseif moyenne > 6 %}
+                {% set appreciation = "Pas génial" %}
+            {% elseif moyenne > 4 %}
+                {% set appreciation = "Qu'est-ce que c'est que ça ?" %}
+            {% elseif moyenne > 2 %}
+                {% set appreciation = "Pas la peine de continuer" %}
+            {% else %}
+                {% set appreciation = "Mauvais" %}
+            {% endif %}
+        {% else %}
+            {% set appreciation = "Pas encore de note pour cette histoire" %}
+        {% endif %}
+        &nbsp;&nbsp;&nbsp;&nbsp;Note moyenne : {{ appreciation }}
+        <br/>
+    {% else %}
+        <li>Pas (encore !) d'histoires</li>
+    {% endfor %}        
+</div>

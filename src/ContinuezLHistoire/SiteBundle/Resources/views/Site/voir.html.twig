@@ -1,0 +1,109 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+
+{% block title %}
+  {{ parent() }} - Visualisation d'une histoire
+{% endblock %}
+  
+{% block continuezlhistoiresite_body %}
+
+<p id="comptearebours"></p>
+  
+{% if histoire[0].image != '' %}
+    {% if is_granted('ROLE_AUTEUR') %}
+        <a href="{{ path('continuezlhistoiresite_ajouterimage', {'id': histoire[0].id, 'typemodification': typemodification}) }}">Modifier l'image</a>
+        <br/>
+        <br/>
+    {% endif %}
+<table align="center">
+ <tr>
+      <td align="center" valign="top"><img src="{{ asset(histoire[0].image.webPath)}}" alt="{{ histoire[0].image.alt }}" height="auto" width="auto" /></td>
+ </tr>
+</table>
+{% elseif is_granted('ROLE_AUTEUR') %}
+  <a href="{{ path('continuezlhistoiresite_ajouterimage', {'id': histoire[0].id, 'typemodification': typemodification}) }}">Ajouter une image</a>
+  <br/>
+  <br/>
+{% endif %}
+  
+{% for histoires in histoire %}
+	<b>{{ histoires.titre }}</b>
+{% endfor %}
+<br/>
+<br/>
+{% if histoire[0].estClos %}
+    Cette histoire est close.
+    <br/>
+    <br/>
+{% elseif histoire[0].estEnInstanceDeCloture %}
+    Cette histoire est en instance de clôture depuis le {{ histoire[0].dateCloture|date('d/m/Y') }} à {{ histoire[0].dateCloture|date('h:i:s') }}
+    <br/>
+    <br/>
+{% endif %}
+
+
+{% for sousHistoire in listeSousHistoires %}
+	{% if (sousHistoire.auteur == app.user) or ((sousHistoire.auteur.username == "anonymous") and (app.user != null)) %}
+            <a href="{{ path('continuezlhistoiresite_modifiersoushistoire', {'id': sousHistoire.id, 'typemodification': typemodification}) }}">{{ sousHistoire.contenu  | raw }}</a>
+        {% else %}
+            {{ sousHistoire.contenu | raw }}
+        {% endif %}
+{% endfor %}
+
+<br/>
+<br/>
+
+{% if is_granted('ROLE_AUTEUR') and not modificationencours %}
+<!--<div class="well">-->
+<center>Votre avis sur cette histoire : 
+  {% if avis == '' %}
+        Pas de note
+  {% else %}
+        {{ avis }}
+  {% endif %}
+</center>
+        <form method="post" {{ form_enctype(form) }}>
+		<center>{{ form_widget(form) }}
+		<input type="submit" class="btn btn-primary" /></center>
+	</form>
+<!--</div>-->
+{% endif %}
+            
+{% if modificationencours %}
+    Modification de l'histoire en cours par un autre utilisateur. Patientez quelques instants puis réessayez.        
+{% endif %}
+
+<br/>
+    
+<p>
+    {% if typemodification == 1 %}
+        <a href="{{ path('continuezlhistoiresite_accueil') }}" class="btn">
+    {% else %}
+        <a href="{{ path('continuezlhistoiresite_consulterhistoiresterminees') }}" class="btn">
+    {% endif %}
+            <i class="icon-chevron-left"></i>
+            Retour à la liste
+        </a>
+    {% if not histoire[0].estClos %}
+        <a href="{{ path('continuezlhistoiresite_modifier', {'id': histoire[0].id, 'typemodification': typemodification}) }}" class="btn">
+            <i class="icon-edit"></i>
+            Modifier l'histoire
+        </a>
+    {% endif %}
+    {% if not (histoire[0].estEnInstanceDeCloture or histoire[0].estClos ) %}
+        <a href="{{ path('continuezlhistoiresite_cloturer', {'id': histoire[0].id, 'typemodification': typemodification}) }}" class="btn">
+            <i class="icon-lock"></i>
+            Clôturer l'histoire
+        </a>
+    {% elseif not histoire[0].estClos %}
+        <a href="{{ path('continuezlhistoiresite_decloturer', {'id': histoire[0].id, 'typemodification': typemodification}) }}" class="btn">
+            <i class="icon-pencil"></i>
+            Dévérouiller l'histoire
+        </a>
+    {% endif %}
+        <a href="{{ path('continuezlhistoiresite_consulterlisteauteur', {'id': histoire[0].id, 'typemodification': typemodification}) }}" class="btn">
+            <i class="icon-list"></i>
+            Voir la liste des auteurs
+        </a>
+</p>
+
+{% endblock %}

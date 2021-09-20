@@ -1,0 +1,98 @@
+{% extends "ContinuezLHistoireForumBundle::layout.html.twig" %}
+ 
+{% block title %}
+  {{ parent() }} - Discussion - {{ discussion.sujet }}
+{% endblock %}
+ 
+{% block continuezlhistoireforum_body %}
+  <h2 class="sousTitrePage">{{ discussion.sujet }}
+      {% if discussion.auteur == user %}
+      <a href="{{ path("continuezlhistoireforum_modifierdiscussion", {'id' : discussion.id}) }}">
+        <img src="{{ asset('img/icone-modifier.png') }}"/>
+      </a>
+      <a href="{{ path("continuezlhistoireforum_supprimerdiscussion", {'id' : discussion.id}) }}">
+        <img src="{{ asset('img/icone-fermer.png') }}"/>
+      </a>
+      {% endif %}
+  </h2>
+  
+    <b>Liste des messages</b>
+    <br/>
+    
+    {% if listeMessages|length > 0 %}
+        {% for message in listeMessages %}
+            <div class="well">
+                <!--<div class="content">-->
+                <b>Posté le {{ message.date|date("d/m/Y") }} à {{ message.date|date("H:i:s") }}
+                par {{ message.auteur }}</b>
+                
+                {% if message.auteur == user %}
+                    <div class="relative-right">
+                    <a href="{{ path("continuezlhistoireforum_supprimermessage", {'id' : message.id}) }}">
+                        <img src="{{ asset('img/icone-fermer.png') }}"/>
+                    </a>
+                    </div>
+                
+                    <div class="relative-right">
+                    <a href="{{ path("continuezlhistoireforum_modifiermessage", {'id' : message.id}) }}">
+                        <img src="{{ asset('img/icone-modifier.png') }}"/>
+                    </a>
+                    </div>
+                {% endif  %}
+                
+                <br/>
+                {{ message.corps | raw }}
+                <!--</div>-->
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="well">
+            Il n'y a actuellement aucun message dans cette conversation.
+        </div>
+    {% endif %}
+  
+  {% if user != null and is_granted('ROLE_AUTEUR') %}
+    <p id="nombredecharacteres"></p>
+    {{ tinymce_init() }}
+    <div class="well">
+        <form method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form) }}
+            <input type="submit" class="btn btn-primary" />
+        </form>
+    </div>
+  {% elseif user != null %}
+    Vous n'êtes pas autorisé à poster sur le forum. Si vous pensez que c'est une erreur, veuillez 
+    contacter l'administrateur.
+  {% else %}
+    Pour répondre à cette discussion, vous devez être connecté.
+  {% endif %}
+  
+  <br/>
+  <br/>
+  <a href="{{ path("continuezlhistoireforum_accueilforum") }}" class="btn">
+      <i class="icon-chevron-left"></i>
+      Retour à l'accueil du forum
+  </a>
+  
+  <script type="text/javascript">
+    var myVar=setInterval(function(){AfficheCaracteresRestants();},1000);
+      
+    function AfficheCaracteresRestants()
+    {
+        document.getElementById("nombredecharacteres").innerHTML = "Nombre de caractères restants : " + (255 - tinyMCE.activeEditor.getContent().length);
+
+        if(255 - tinyMCE.activeEditor.getContent().length < 0)
+            document.getElementById("nombredecharacteres").style.color = "red";
+        else
+            document.getElementById("nombredecharacteres").style.color = "black";
+    }  
+    
+    tinymce_init({
+      mode : "textareas",
+      theme : "advanced",
+      force_br_newlines : false,
+      force_p_newlines : false,
+      forced_root_block : 'br'
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+
+{% block title %}
+  {{ parent() }} - Guide d'utilisation
+{% endblock %}
+  
+{% block continuezlhistoiresite_body %}
+  <h3 class="sousTitrePage">Guide d'utilisation</h3>
+  
+  <h4>Présentation</h4>
+  <p><b>Continuez l'histoire</b> est un site participatif permettant à ses utilisateurs d'écrire des 
+     histoires ensemble.</p>
+  
+  <h4>Utilisateurs non connectés</h4>
+  <p>Les utilisateurs non connectés ont la possibilité de lire les histoires en cours ainsi que les 
+     histoires terminées. Ils peuvent aussi lire les messages sur le forum.</p>
+  
+  <h4>Utilisateurs connectés</h4>
+  <p>Les utilisateurs connectés peuvent effectuer les mêmes actions que ceux non connectés. De plus, ils 
+     peuvent ajouter des histoires, supprimer les histoires qu'ils ont créées en cliquant sur la croix <img src="{{ asset('img/icone-fermer.png') }}"/>.
+     Ils peuvent aussi modifier les histoires en cliquant sur le bouton Modifer l'histoire. Lorsqu'un 
+     utilisateur estime que l'histoire est terminée, il peut cliquer sur le bouton Clôturer l'histoire. 
+     Cette action aura pour effet de mettre l'histoire en instance de clôture. Lorsqu'une histoire est en 
+     instance de clôture, si elle n'est pas dévérouillée avent 3 jours, elle est considerée comme terminée.</p>
+{% endblock %}

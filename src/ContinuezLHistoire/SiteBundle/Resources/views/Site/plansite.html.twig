@@ -1,0 +1,16 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+
+{% block title %}
+   {{ parent() }} - Plan du site
+{% endblock %}
+  
+{% block continuezlhistoiresite_body %}
+   <p align="center">************************</p>
+   <p align="center"><a href="{{ path('continuezlhistoiresite_accueil') }}">Accueil</a></p>
+   <p align="center"><a href="{{ path('continuezlhistoiresite_consulterhistoiresterminees') }}">Histoires terminées</a></p>
+   <p align="center"><a href="{{ path('continuezlhistoireforum_accueilforum') }}">Forum</a></p>
+   <p align="center"><a href="{{ path('continuezlhistoiresite_modeemploi') }}">Guide d'utilisation</a></p>
+   <p align="center"><a href="{{ path('continuezlhistoiresite_infosauteur') }}">Infos auteur</a></p>
+   <p align="center"><a href="{{ path('continuezlhistoiresite_cgu') }}">CGU</a></p>
+   <p align="center">************************</p>
+{% endblock %}

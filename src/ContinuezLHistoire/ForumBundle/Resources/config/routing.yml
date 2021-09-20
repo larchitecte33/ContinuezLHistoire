@@ -1,0 +1,33 @@
+continuezlhistoireforum_accueilforum:
+    path:     /forum
+    defaults: { _controller: ContinuezLHistoireForumBundle:Forum:accueilForum }
+
+continuezlhistoireforum_discussion:
+    path:     /discussion/{id}
+    defaults: { _controller: ContinuezLHistoireForumBundle:Forum:discussion }
+    requirements:
+        id: \d+
+        
+continuezlhistoireforum_supprimermessage:
+    path:    /supprimer_message/{id}
+    defaults: { _controller: ContinuezLHistoireForumBundle:Forum:supprimerMessage }
+    requirements:
+        id: \d+
+
+continuezlhistoireforum_modifiermessage:
+    path:    /modifier_message/{id}
+    defaults: { _controller: ContinuezLHistoireForumBundle:Forum:modifierMessage }
+    requirements:
+        id: \d+
+        
+continuezlhistoireforum_modifierdiscussion:
+    path:   /modifier_discussion/{id}
+    defaults: { _controller: ContinuezLHistoireForumBundle:Forum:modifierDiscussion }
+    requirements:
+        id: \d+
+        
+continuezlhistoireforum_supprimerdiscussion:
+    path:   /supprimer_discussion/{id}
+    defaults: { _controller: ContinuezLHistoireForumBundle:Forum:supprimerDiscussion }
+    requirements:
+        id: \d+

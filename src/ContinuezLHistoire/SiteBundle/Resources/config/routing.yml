@@ -1,0 +1,133 @@
+continuezlhistoiresite_index:
+    path: /
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:redirigerVersAccueil }
+
+continuezlhistoiresite_accueil:
+    path: /accueil
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:index }
+
+continuezlhistoiresite_voir:
+    path: /histoire/{id}/{modificationencours}/{typemodification}
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:voir, modificationencours: 0, typemodification: 0 }
+    requirements:
+        id: \d+
+
+continuezlhistoiresite_modifier:
+    path: /modifier/{id}/{typemodification}
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:modifier }
+    requirements:
+        id: \d+
+
+continuezlhistoiresite_ajouterhistoire:
+    path: /ajouter
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:ajouter }
+
+continuezlhistoiresite_choixutilisateur:
+    path: /droits
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:choixutilisateur }
+
+continuezlhistoiresite_droits:
+    path: /droits/{id}
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:droits }
+    requirements:
+        id: \d+
+
+continuezlhistoiresite_attributiondroitauteur:
+    path: /attribution_droit_auteur
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:attributionDroitAuteur }
+
+continuezlhistoiresite_logout:
+    path: /deconnexion
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:deconnexion }
+
+continuezlhistoiresite_modifiersoushistoire:
+    path: /modifier_sous_histoire/{id}/{typemodification}
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:modifierSousHistoire }
+
+continuezlhistoiresite_stopperedition:
+    path: /stopper_edition/{id}/{typemodification}
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:stopperEdition }
+
+continuezlhistoiresite_supprimersoushistoire:
+    path: /supprimer_sous_histoire/{id}/{typemodification}
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:supprimerSousHistoire }
+
+continuezlhistoiresite_cloturer:
+    path: /cloturer/{id}/{typemodification}
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:cloturer }
+
+continuezlhistoiresite_decloturer:
+    path: /decloturer/{id}/{typemodification}
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:decloturer }
+
+continuezlhistoiresite_consulterlisteauteur:
+    path: /consulter_liste_auteurs/{id}/{typemodification}
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:consulterListeAuteurs }
+
+continuezlhistoiresite_gererprofil:
+    path: /profil/{id}
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:gererProfil }
+    requirements:
+        id: \d+
+        
+continuezlhistoiresite_testbootstrap:
+    path: /test_bootstrap
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:testBootstrap }
+    
+continuezlhistoiresite_consulterhistoiresterminees:
+    path: /histoires_terminees
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:consulterHistoiresTerminees }
+
+continuezlhistoiresite_infosauteur:
+    path: /infos_auteur
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:infosAuteur }
+    
+#continuezlhistoiresite_ajouterparagraphe:
+#    path: /histoire/ajouterParagraphe/{id}/{typemodification}
+#    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:ajouterParagraphe }
+    
+continuezlhistoiresite_consulterprofil:
+    path: /consulter_profil/{username}
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:consulterProfil } 
+
+continuezlhistoiresite_modifierdescription:
+    path: /modifier_profil/{username}
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:modifierDescription }
+
+#continuezlhistoiresite_test:
+#    path: /test
+#    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:Test}
+    
+#continuezlhistoiresite_testtinymce:
+#    path: /test_tinymce
+#    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:TestTinyMCE}
+    
+continuezlhistoiresite_ajouterimage:
+    path: /ajouter_image/{id}/{typemodification}
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:AjouterImage}
+    requirements:
+        id: \d+
+        
+continuezlhistoiresite_afficherformulairecontact:
+    path: /contact
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:AfficherFormulaireContact}
+    
+#continuezlhistoiresite_messagerie:
+#    path: /messagerie/{id}
+#    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:ConsulterMessages}
+    
+continuezlhistoiresite_cgu:
+    path: /cgu
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:ConsulterCGU}
+    
+continuezlhistoiresite_supprimer:
+    path: /supprimer/{id}
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:Supprimer}
+    
+continuezlhistoiresite_modeemploi:
+    path: /mode_emploi
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:ConsulterModeEmploi}
+    
+continuezlhistoiresite_plansite:
+    path: /plan_site
+    defaults: { _controller: ContinuezLHistoireSiteBundle:Site:ConsulterPlanSite}

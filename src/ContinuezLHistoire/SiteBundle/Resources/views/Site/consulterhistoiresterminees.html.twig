@@ -1,0 +1,12 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+ 
+{% block title %}
+  {{ parent() }} - Liste des histoires terminées
+{% endblock %}
+ 
+{% block continuezlhistoiresite_body %}
+  
+  <h2 class="sousTitrePage">Liste des histoires terminées</h2>
+  
+  {% include "ContinuezLHistoireSiteBundle:Site:listeHistoire.html.twig" %}
+{% endblock %}

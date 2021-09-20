@@ -1,0 +1,48 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+
+{% block title %}
+  {{ parent() }} - Description utilisateur
+{% endblock %}
+
+{% block body %}
+  <h2>Description utilisateur</h2>
+ 
+  <p id="nombredecharacteres"></p>
+  
+  {{ tinymce_init() }}
+  <div class="well">    
+        <form method="post" {{ form_enctype(form) }}>
+            {{ form_label(form, 'Vous pouvez ici vous décrire') }}
+            {{ form_widget(form) }}
+            
+            <input type="submit" class="btn btn-primary" />    
+            
+        </form>
+  </div>
+  
+  <a href="{{ path('continuezlhistoiresite_gererprofil', {'id': app.user.id}) }}" class="btn">
+    <i class="icon-chevron-left"></i>
+        Retour
+  </a>
+  
+  <script type="text/javascript">
+    var myVar=setInterval(function(){AfficheCaracteresRestants();},1000);
+      
+    function AfficheCaracteresRestants()
+    {
+      document.getElementById("nombredecharacteres").innerHTML = "Nombre de caractères restants : " + (255 - tinyMCE.activeEditor.getContent().length);
+    
+      if(255 - tinyMCE.activeEditor.getContent().length < 0)
+        document.getElementById("nombredecharacteres").style.color = "red";
+      else
+        document.getElementById("nombredecharacteres").style.color = "black";
+    }  
+      
+    tinymce_init({
+        mode : "textareas",
+        theme : "advanced",
+        force_br_newlines : false,
+        force_p_newlines : false
+    });
+  </script>
+{% endblock %}

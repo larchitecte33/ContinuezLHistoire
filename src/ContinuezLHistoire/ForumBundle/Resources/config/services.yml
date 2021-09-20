@@ -1,0 +1,7 @@
+parameters:
+#    continuez_l_histoire_forum.example.class: ContinuezLHistoire\ForumBundle\Example
+
+services:
+#    continuez_l_histoire_forum.example:
+#        class: %continuez_l_histoire_forum.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

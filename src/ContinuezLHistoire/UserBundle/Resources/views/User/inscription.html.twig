@@ -1,0 +1,16 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+ 
+{% block title %}
+  Récapitulatif des informations du compte - {{ parent() }}
+{% endblock %}
+ 
+{% block continuezlhistoiresite_body %}
+    <div class="well">    
+        <form method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form) }}
+            
+            <input type="submit" class="btn btn-primary" />    
+            
+        </form>
+    </div>
+{% endblock %}

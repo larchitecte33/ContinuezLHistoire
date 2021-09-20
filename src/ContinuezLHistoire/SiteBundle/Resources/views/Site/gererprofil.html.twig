@@ -1,0 +1,47 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+ 
+{% block title %}
+  {{ parent() }} - Gestion du profil
+{% endblock %}
+ 
+{% block continuezlhistoiresite_body %}
+  <h3 class="sousTitrePage">Gestion du profil</h3>
+  
+  <b>{{ 'Nom d\'utilisateur : '|trans }}</b> {{ user.username }}
+  <br/>
+  
+  <b>{{ 'Email : '|trans }}</b> {{ user.email }}
+  <br/>
+  <br/>
+  
+  <a href="{{ path('fos_user_profile_edit') }}">Modifier profil</a>
+  <br/>
+  
+  <a href="{{ path('fos_user_change_password') }}">Modifier mot de passe</a>
+  <br/>
+  <br/>
+  
+  {% if user.quiSuisJe != null %}
+    <b>Description</b> : {{ user.quiSuisJe | raw }}
+  {% endif %}
+  <a href="{{ path('continuezlhistoiresite_modifierdescription', {'username': user.username}) }}">Modifier ma description</a>
+  <br/>
+  <br/>
+  <center>
+    {% if user.imageProfil != null %}
+      <b>Image de profil</b>
+      <br/>
+      <img src="{{ asset(user.imageProfil.webPath)}}" alt="{{ user.imageProfil.alt }}" height="auto" width="auto" />
+    {% endif %}
+    <br/>
+    <font color="red"> {{ message }} </font>
+    <br/>
+    <br/>
+    <form method="post" {{ form_enctype(form) }}>
+      {{ form_widget(form) }}
+      <input type="submit" class="btn btn-primary" />    
+    </form>
+   </center>
+    
+    <center><a href={{ path('continuezlhistoiresite_consulterprofil', {'username' : user.username}) }}>Visualiser mon profil public</a></center>
+{% endblock %}

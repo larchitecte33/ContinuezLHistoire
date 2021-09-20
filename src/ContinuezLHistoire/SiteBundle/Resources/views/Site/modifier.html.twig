@@ -1,0 +1,58 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+ 
+{% block title %}
+  {{ parent() }} - Visualisation d'une histoire
+{% endblock %}
+ 
+{% block continuezlhistoiresite_body %}
+  
+  <p id="comptearebours"></p>
+  
+  <b>{{ histoire.titre }}</b>
+    <br/>
+    <br/>
+  {% for sousHistoire in listeSousHistoires %}	
+    {{ sousHistoire.contenu }}
+  {% endfor %}
+  <div class="well">
+        <form method="post" {{ form_enctype(form) }}>
+		{{ form_widget(form) }}
+		<input type="submit" class="btn btn-primary" />
+	</form>
+  </div>
+  
+  <p>
+    <a href="{{ path('continuezlhistoiresite_stopperedition', {'id': histoire.id}) }}" class="btn">
+      <i class="icon-chevron-left"></i>
+      Retour à la liste
+    </a>
+  </p>
+  
+  <!--
+  <script type="text/javascript">
+    var myVar=setInterval(function(){myTimer();},1000);
+    var nbSecondesRestantes = 60;
+
+    function myTimer()
+        {
+            var d=new Date();
+            var t=nbSecondesRestantes;
+
+            if(t < 0)
+            {
+                t = 0;
+            }
+
+            document.getElementById("comptearebours").innerHTML="Nombre de secondes restantes avant la fin de l'édition :  " + t;
+
+            nbSecondesRestantes--;
+
+            if(nbSecondesRestantes === 0)
+            {
+                    window.location = "http://localhost/Symfony/web/app_dev.php/accueil";
+            }
+        }
+  </script>
+-->
+  
+{% endblock %}

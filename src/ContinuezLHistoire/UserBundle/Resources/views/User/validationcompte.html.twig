@@ -1,0 +1,16 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+ 
+{% block title %}
+  Validation de compte - {{ parent() }}
+{% endblock %}
+ 
+{% block continuezlhistoiresite_body %}
+  <p>Pour valider votre compte, il vous suffit de saisir votre nom d'utilisateur (entré lors de 
+      l'inscription) ainsi que le code d'activation que vous avez reçu par e-mail.</p>
+  <div class="well">
+        <form method="post" {{ form_enctype(form) }}>
+		{{ form_widget(form) }}
+		<input type="submit" class="btn btn-primary" />
+	</form>
+  </div>
+{% endblock %}

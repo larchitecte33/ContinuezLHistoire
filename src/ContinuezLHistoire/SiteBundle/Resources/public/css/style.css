@@ -1,0 +1,25 @@
+/* 
+    Document   : style
+    Created on : 18 janv. 2014, 15:26:58
+    Author     : GA
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.horizontal {
+    display: inline;
+}
+
+.image {
+    float: left;
+    width: 20%;
+}
+
+.description {
+    float : right;
+    width : 20%;
+}

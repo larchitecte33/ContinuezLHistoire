@@ -1,0 +1,23 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+
+{% block title %}
+  {{ parent() }} - Supprimer une histoire 
+{% endblock %}
+  
+{% block continuezlhistoiresite_body %}
+  <h2>Supprimer une histoire</h2>
+  
+  <p>
+      Etes-vous sûr de vouloir supprimer cette histoire ? <br/>
+      La suppression d'une histoire entraine celle de toutes les sous-histoires la composant.
+  </p>
+  
+  <form action="{{ path('continuezlhistoiresite_supprimer', {'id': histoire.id}) }}" method="post">
+    <a href="{{ path('continuezlhistoiresite_accueil') }}" class="btn">
+      <i class="icon-chevron-left"></i>
+      Retour à la liste
+    </a>
+    <input type="submit" value="Supprimer" class="btn btn-danger" />
+    {{ form_rest(form) }}
+  </form>
+{% endblock %}

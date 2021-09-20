@@ -1,0 +1,16 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+ 
+{% block title %}
+  {{ parent() }} - Accueil
+{% endblock %}
+ 
+{% block continuezlhistoiresite_body %}
+
+    {% if vientDeSInscrire %}
+        Vous allez recevoir un e-mail permettant d'activer votre compte.
+    {% endif %}
+  
+    <h2 class="sousTitrePage">Liste des histoires en cours</h2>
+	
+    {% include "ContinuezLHistoireSiteBundle:Site:listeHistoire.html.twig" %}        
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+ 
+{% block title %}
+  {{ parent() }} - Ajout d'une image
+{% endblock %}
+ 
+{% block continuezlhistoiresite_body %}
+    <h3>Ajout d'une image</h3>
+ 
+    {% if message != '' %}
+        <p style="color:red"> {{ message }} </p>
+    {% endif %}
+    <div class="well">
+        <form method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form) }}
+            <input type="submit" class="btn btn-primary" />
+	</form>
+    </div>
+    
+    <p>
+        <a href="{{ path('continuezlhistoiresite_voir', {'id': histoire.id, 'typemodification': typemodification}) }}" class="btn">
+            <i class="icon-chevron-left"></i>
+            Retour à l'histoire
+        </a>
+    </p>
+{% endblock %}

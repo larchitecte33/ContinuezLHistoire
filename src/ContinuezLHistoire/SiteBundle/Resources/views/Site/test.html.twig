@@ -1,0 +1,17 @@
+{% extends "ContinuezLHistoireSiteBundle::layout.html.twig" %}
+ 
+{% block title %}
+  Test - {{ parent() }}
+{% endblock %}
+ 
+{% block continuezlhistoiresite_body %}
+    {{ tinymce_init() }}
+    <div class="well">    
+        <form method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form) }}
+            
+            <input type="submit" class="btn btn-primary" />    
+            
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ 
+    <title>{% block title %}Continuez l'histoire{% endblock %}</title>
+ 
+    {% block stylesheets %}
+      <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" type="text/css" />
+      <link rel="icon" type="image/png" href="{{ asset('img/iconeSite.ico') }}" />
+      <style type="text/css">
+/*.paraph
+{
+color: red;
+margin: 0;
+display:inline;
+}*/
+
+/*p
+{
+  display: inline;    
+}*/
+
+.enLigne
+{
+  display: inline;  
+}
+
+</style>
+    {% endblock %}
+  </head>
+ 
+  <body>
+    <div class="container">
+      <div id="header" class="hero-unit">
+          
+      </div>
+ 
+      {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        Connecté en tant que {{ app.user.username }} - <a href="{{ path('continuezlhistoiresite_logout') }}">Déconnexion</a>
+      {% else %}
+        <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+      {% endif %}
+      |  
+      <a href="{{ path('fos_user_registration_register') }}">Inscription</a>
+      {% if is_granted('ROLE_AUTEUR') or app.session.get('connecte') %}
+        |
+        <a href="{{ path('continuezlhistoireuser_desinscription', {'id': app.user.id}) }}">Désinscription</a>
+      {% endif %}
+      |
+      <a href="{{ path('continuezlhistoireuser_validationcompte') }}">Valider mon compte</a>
+      |
+      <a href="{{ path('fos_user_resetting_request') }}">Réinitialiser mot de passe</a>
+      {% if is_granted('ROLE_AUTEUR') or app.session.get('connecte') %}
+        |
+        <a href="{{ path('continuezlhistoiresite_gererprofil', {'id': app.user.id}) }}">Gérer mon profil</a>
+      {% endif %}
+            
+      <div class="row">
+        <div id="menu" class="span3">
+          <h3 class="titreMenu">Menu</h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="{{ path('continuezlhistoiresite_accueil') }}">Accueil du site</a></li>
+            {% if is_granted('ROLE_AUTEUR') or app.session.get('connecte') %}
+                <li><a href="{{ path('continuezlhistoiresite_ajouterhistoire') }}">Ajouter une histoire</a></li>
+            {% endif %}
+            <li><a href="{{ path('continuezlhistoiresite_consulterhistoiresterminees') }}">Histoires terminées</a>
+            <li><a href="{{ path('continuezlhistoireforum_accueilforum') }}">Forum</a></li>
+            <!-- <li><a href=" path('continuezlhistoireconcours_listeconcours') }}">Concours d'écriture</a></li> -->
+            
+            <!--  if is_granted('ROLE_AUTEUR') or app.session.get('connecte') 
+                <li><a href=" path('continuezlhistoiresite_messagerie', {'id': app.user.id}) }}">Messagerie</a></li>
+             endif %} -->
+            
+            {% if is_granted('ROLE_ADMIN') %}
+                <li><a href="{{ path('continuezlhistoiresite_choixutilisateur') }}">Gérer les droits</a></li>
+            {% endif %}
+            <li><a href="{{ path('continuezlhistoiresite_modeemploi') }}">Guide d'utilisation</a></li>
+          </ul>
+        </div>
+              
+        <div id="content" class="span9">
+          {% block body %}
+          {% endblock %}
+        </div>
+      </div>
+ 
+      <hr>
+ 
+      <div id="footer" class="modal-footer">
+          <a href="{{ path('continuezlhistoiresite_infosauteur') }}">A propos de l'auteur</a>
+          &nbsp;
+          {{ render(controller('ContinuezLHistoireSiteBundle:Site:statistiquesSite')) }}
+          &nbsp;
+          <a href="{{ path('continuezlhistoiresite_plansite') }}">Plan du site</a>
+          &nbsp;
+          <a href="{{ path('continuezlhistoiresite_cgu') }}">Conditions Générales d'Utilisation</a>
+          <br/>
+          --------------------------------------
+          <br/>
+          Site développé par Gauthier Dubourdieu
+      </div>
+    </div>
+ 
+  {% block javascripts %}
+    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalit�s du bootstrap Twitter #}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+  {% endblock %}
+ 
+  </body>
+</html>
